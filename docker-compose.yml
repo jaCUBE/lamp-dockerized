@@ -1,8 +1,9 @@
-version: '3'
+version: "3"
 
 services:
   php:
     build: ./_docker/_images/php-7.2
+    image: php:7.2-app
     container_name: app-php
     volumes:
       - ./:/var/www/html
