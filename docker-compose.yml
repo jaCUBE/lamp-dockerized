@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  php:
+    build: ./_docker/_images/php-7.2
+    container_name: jacube-php
+    volumes:
+      - ./:/var/www/html
+      - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./_docker/logs/apache/:/var/log/apache2
+      - ./_docker/logs/php/:/var/log/php
+    ports:
+      - "80:80"
+      - "443:443"
+    tty: true
+
+  mariadb:
+    image: mariadb:10.3
+    container_name: jacube-mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_CHARSET=utf8
+      - MYSQL_COLLATION=utf8_czech_ci
+    volumes:
+      - ./_docker/conf/mysql/:/etc/mysql/:ro
+      - jacube-db-volume:/var/lib/mysql
+      - ./_docker/data:/data:ro
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+
+
+
+
+#  mysql:
+#    image: mysql:5.7.22
+#    container_name: jacube-mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 12345
+#      - MYSQL_CHARSET: utf8
+#      - MYSQL_COLLATION: utf8_czech_ci
+#    volumes:
+#      - ./_docker/conf/mysql/:/etc/mysql/:ro
+#      - ./_docker/mysql:/var/lib/mysql
+#      - ./_docker/sql:/data:ro
+#    ports:
+#      - "3306:3306"
+
+volumes:
+  jacube-db-volume:
