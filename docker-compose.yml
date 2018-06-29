@@ -35,36 +35,36 @@ services:
     ports:
       - "3306:3306"
 
-  redis:
-    image: redis:alpine
-    container_name: app-redis
-    volumes:
-      - app-redis-volume:/data
-    entrypoint: redis-server --appendonly yes
-    networks:
-      - app-network
-    expose:
-      - 6379
-    ports:
-      - "6379:6379"
-
-  elasticsearch:
-    image: elasticsearch:5.6-alpine
-    container_name: app-elasticsearch
-    volumes:
-      - app-elasticsearch-volume:/usr/share/elasticsearch/data
-    expose:
-      - 9200
-    ports:
-      - "9200:9200"
-    networks:
-      - app-network
-
-  memcached:
-    image: memcached:alpine
-    container_name: app-memcached
-    networks:
-      - app-network
+#  redis:
+#    image: redis:alpine
+#    container_name: app-redis
+#    volumes:
+#      - app-redis-volume:/data
+#    entrypoint: redis-server --appendonly yes
+#    networks:
+#      - app-network
+#    expose:
+#      - 6379
+#    ports:
+#      - "6379:6379"
+#
+#  elasticsearch:
+#    image: elasticsearch:5.6-alpine
+#    container_name: app-elasticsearch
+#    volumes:
+#      - app-elasticsearch-volume:/usr/share/elasticsearch/data
+#    expose:
+#      - 9200
+#    ports:
+#      - "9200:9200"
+#    networks:
+#      - app-network
+#
+#  memcached:
+#    image: memcached:alpine
+#    container_name: app-memcached
+#    networks:
+#      - app-network
 
 
 
