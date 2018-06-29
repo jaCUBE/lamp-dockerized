@@ -6,10 +6,17 @@ LABEL maintainer="Jakub Rychecký <jakub@rychecky.cz>" \
 ENV BUILD_DATE 2018-06-29
 
 
-# -- BASIC LINUX SOFTWARE --
+# -- BASIC LINUX TOOLS AND DEPENDENCIES --
 RUN    apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y wget gnupg2 nano nmap ca-certificates apt-transport-https
+    && apt-get install -y wget \
+                          curl \
+                          git \
+                          gnupg2 \
+                          nano \
+                          nmap \
+                          ca-certificates \
+                          apt-transport-https
 
 
 # -- PHP INSTALLATION --
@@ -19,7 +26,7 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
     && apt-get upgrade -y \
     # Installs PHP 7.2 and its extensions
     && apt-get install -y php7.2 \
-    && apt-get install -y php7.2-cli \
+                          php7.2-cli \
                           php7.2-common \
                           php7.2-curl \
                           php7.2-gd \
@@ -35,9 +42,19 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
 
 
 # -- APACHE INSTALLATION --
-RUN apt-get install apache2
-# Automatically starts Apache with container start
+RUN apt-get install -y apache2
 ENTRYPOINT service apache2 start && /bin/bash
+
+
+# -- COMPOSER INSTALLATION --
+RUN php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" \
+    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+
+# -- NODEJS INSTALLATION --
+RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
+    && bash nodesource_setup.sh \
+    && apt-get install -y nodejs
 
 
 # -- FINISHING --
