@@ -3,12 +3,14 @@ version: '3'
 services:
   php:
     build: ./_docker/_images/php-7.2
-    container_name: jacube-php
+    container_name: app-php
     volumes:
       - ./:/var/www/html
       - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./_docker/logs/apache/:/var/log/apache2
       - ./_docker/logs/php/:/var/log/php
+    networks:
+      - app-network
     ports:
       - "80:80"
       - "443:443"
@@ -16,36 +18,51 @@ services:
 
   mariadb:
     image: mariadb:10.3
-    container_name: jacube-mariadb
+    container_name: app-mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=12345
       - MYSQL_CHARSET=utf8
       - MYSQL_COLLATION=utf8_czech_ci
     volumes:
+      - app-db-volume:/var/lib/mysql
       - ./_docker/conf/mysql/:/etc/mysql/:ro
-      - jacube-db-volume:/var/lib/mysql
       - ./_docker/data:/data:ro
+    networks:
+      - app-network
     expose:
       - 3306
     ports:
       - "3306:3306"
 
+  redis:
+    image: redis:alpine
+    container_name: app-redis
+    volumes:
+      - app-redis-volume:/data
+    entrypoint: redis-server --appendonly yes
+    networks:
+      - app-network
+    expose:
+      - 6379
+    ports:
+      - "6379:6379"
 
+  memcached:
+    image: memcached:alpine
+    container_name: app-memcached
+    networks:
+      - app-network
 
+  elasticsearch:
+    image: elasticsearch:5.4-alpine
+    container_name: app-elasticsearch
+    networks:
+      - app-network
 
-#  mysql:
-#    image: mysql:5.7.22
-#    container_name: jacube-mysql
-#    environment:
-#      MYSQL_ROOT_PASSWORD: 12345
-#      - MYSQL_CHARSET: utf8
-#      - MYSQL_COLLATION: utf8_czech_ci
-#    volumes:
-#      - ./_docker/conf/mysql/:/etc/mysql/:ro
-#      - ./_docker/mysql:/var/lib/mysql
-#      - ./_docker/sql:/data:ro
-#    ports:
-#      - "3306:3306"
 
 volumes:
-  jacube-db-volume:
+  app-db-volume:
+  app-redis-volume:
+
+networks:
+  app-network:

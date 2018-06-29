@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 
 LABEL maintainer="Jakub Rychecký <jakub@rychecky.cz>" \
       description="PHP 7.2 with Apache"
@@ -7,9 +7,9 @@ ENV BUILD_DATE 2018-06-29
 
 
 # -- BASIC LINUX SOFTWARE --
-RUN     apt-get update \
+RUN    apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y wget gnupg2 nano ca-certificates apt-transport-https
+    && apt-get install -y wget gnupg2 nano nmap ca-certificates apt-transport-https
 
 
 # -- PHP INSTALLATION --
