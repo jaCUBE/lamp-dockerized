@@ -28,6 +28,7 @@ services:
       - app-db-volume:/var/lib/mysql
       - ./_docker/conf/mysql/:/etc/mysql/:ro
       - ./_docker/data:/data:ro
+      - ./_docker/logs/mysql:/var/log/mysql/
     networks:
       - app-network
     expose:

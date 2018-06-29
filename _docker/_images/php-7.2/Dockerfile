@@ -44,6 +44,7 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
 # -- APACHE INSTALLATION --
 RUN apt-get install -y apache2
 ENTRYPOINT service apache2 start && /bin/bash
+CMD ln -sf /dev/stdout //var/log/apache2access.log
 
 
 # -- COMPOSER INSTALLATION --
