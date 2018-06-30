@@ -3,7 +3,7 @@ FROM debian:stretch-slim
 LABEL maintainer="Jakub Rychecký <jakub@rychecky.cz>" \
       description="PHP 7.2 with Apache"
 
-ENV BUILD_DATE 2018-06-29
+ENV BUILD_DATE 2018-07-01
 
 
 # -- BASIC LINUX TOOLS AND DEPENDENCIES --
@@ -13,6 +13,7 @@ RUN    apt-get update \
                           curl \
                           git \
                           gnupg2 \
+                          mtr \
                           nano \
                           nmap \
                           ca-certificates \
@@ -32,6 +33,7 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
                           php7.2-gd \
                           php7.2-intl \
                           php7.2-json \
+                          php7.2-ldap \
                           php7.2-mbstring \
                           php7.2-mysql \
                           php7.2-odbc \
@@ -43,12 +45,11 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
 
 # -- APACHE INSTALLATION --
 RUN apt-get install -y apache2
-ENTRYPOINT service apache2 start && /bin/bash
 CMD ln -sf /dev/stdout //var/log/apache2access.log
 
 
 # -- COMPOSER INSTALLATION --
-RUN php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" \
+RUN    php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');" \
     && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 
@@ -57,10 +58,22 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt-get install -y nodejs
 
+# -- CONFIGURATION --
+# PHP config
+COPY 40-custom-php.ini /etc/php/7.2/apache2/conf.d/40-custom-php.ini
+# Timezone settings
+RUN    unlink /etc/localtime \
+    && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
 # -- FINISHING --
-# Config copy
-COPY 40-custom-php.ini /etc/php/7.2/apache2/conf.d/40-custom-php.ini
+# Apache autostart and mod_rewrite enable
+ENTRYPOINT     a2enmod rewrite \
+            && service apache2 start \
+            && /bin/bash
+
+# Cleanup
+RUN     apt-get autoremove \
+    &&  apt-get clean
 
 # Other stuff
 EXPOSE 80 443 10000

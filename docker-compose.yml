@@ -12,6 +12,8 @@ services:
       - ./_docker/logs/php/:/var/log/php
     networks:
       - app-network
+    expose:
+      - 80
     ports:
       - "80:80"
       - "443:443"
