@@ -43,8 +43,11 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
                           php7.2-zip
 
 
-# -- APACHE INSTALLATION --
-RUN apt-get install -y apache2
+# -- APACHE INSTALLATION AND CONFIGURATION --
+RUN    apt-get install -y apache2 \
+    && a2enmod rewrite \
+    && echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf \
+    && a2enconf servername
 CMD ln -sf /dev/stdout //var/log/apache2access.log
 
 
@@ -67,8 +70,7 @@ RUN    unlink /etc/localtime \
 
 # -- FINISHING --
 # Apache autostart and mod_rewrite enable
-ENTRYPOINT     a2enmod rewrite \
-            && service apache2 start \
+ENTRYPOINT  service apache2 start \
             && /bin/bash
 
 # Cleanup
