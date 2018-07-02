@@ -64,19 +64,15 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
 
 
 # -- XDEBUG INSTALLATION AND CONFIGURATION --
-RUN    apt-get install -y php-xdebug \
-    && echo "xdebug.remote_enable=on" >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
-    && echo "xdebug.remote_connect_back=off" >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
-    && echo 'xdebug.remote_port=9000' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
-    && echo 'xdebug.remote_autostart=on' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
-    && echo 'xdebug.remote_host=host.docker.internal' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
-    && echo 'xdebug.idekey=PHPSTORM' >> /etc/php/7.2/apache2/conf.d/xdebug.ini
+RUN    apt-get install -y php-xdebug
 
 
 
 # -- CONFIGURATION --
 # PHP config
 COPY 40-custom-php.ini /etc/php/7.2/apache2/conf.d/40-custom-php.ini
+COPY 50-xdebug.ini /etc/php/7.2/apache2/conf.d/50-xdebug.ini
+
 # Timezone settings
 RUN    unlink /etc/localtime \
     && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
