@@ -40,7 +40,8 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
                           php7.2-redis \
                           php7.2-sqlite3 \
                           php7.2-xml \
-                          php7.2-zip
+                          php7.2-zip \
+                          php-xdebug
 
 
 # -- APACHE INSTALLATION AND CONFIGURATION --
@@ -61,6 +62,18 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt-get install -y nodejs
 
+
+# -- XDEBUG INSTALLATION AND CONFIGURATION --
+RUN    apt-get install -y php-xdebug \
+    && echo "xdebug.remote_enable=on" >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
+    && echo "xdebug.remote_connect_back=off" >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
+    && echo 'xdebug.remote_port=9000' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
+    && echo 'xdebug.remote_autostart=on' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
+    && echo 'xdebug.remote_host=host.docker.internal' >> /etc/php/7.2/apache2/conf.d/xdebug.ini \
+    && echo 'xdebug.idekey=PHPSTORM' >> /etc/php/7.2/apache2/conf.d/xdebug.ini
+
+
+
 # -- CONFIGURATION --
 # PHP config
 COPY 40-custom-php.ini /etc/php/7.2/apache2/conf.d/40-custom-php.ini
@@ -78,5 +91,5 @@ RUN     apt-get autoremove \
     &&  apt-get clean
 
 # Other stuff
-EXPOSE 80 443 10000
+EXPOSE 80 443 9000
 WORKDIR /var/www/html

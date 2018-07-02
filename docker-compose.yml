@@ -14,6 +14,8 @@ services:
       - app-network
     expose:
       - 80
+      - 443
+      - 9000
     ports:
       - "80:80"
       - "443:443"
