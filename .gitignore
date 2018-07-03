@@ -1,3 +1,7 @@
-/_docker/logs/apache/*
-/_docker/logs/php/*
-/_docker/data/*
+!.gitkeep
+
+# Docker files
+/_docker/data/
+/_docker/data-sql/
+/_docker/logs/apache/
+/_docker/logs/php/
