@@ -7,9 +7,11 @@ services:
     container_name: app-php
     volumes:
       - ./:/var/www/html:cached
+      - ./_docker/data:/data
       - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./_docker/logs/apache/:/var/log/apache2:delegated
       - ./_docker/logs/php/:/var/log/php:delegated
+      - ./_docker/logs/xdebug:/var/log/xdebug/:delegated
     networks:
       - app-network
     expose:
@@ -31,7 +33,7 @@ services:
     volumes:
       - app-db-volume:/var/lib/mysql:delegated
       - ./_docker/conf/mysql/:/etc/mysql/:ro
-      - ./_docker/data:/data:ro
+      - ./_docker/sql:/data:ro
       - ./_docker/logs/mysql:/var/log/mysql/:delegated
     networks:
       - app-network
