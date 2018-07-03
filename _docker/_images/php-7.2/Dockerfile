@@ -6,6 +6,9 @@ LABEL maintainer="Jakub Rychecký <jakub@rychecky.cz>" \
 ENV BUILD_DATE 2018-07-01
 
 
+
+
+
 # -- BASIC LINUX TOOLS AND DEPENDENCIES --
 RUN    apt-get update \
     && apt-get upgrade -y \
@@ -71,12 +74,10 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
     && apt-get install -y nodejs
 
 
-# -- XDEBUG INSTALLATION AND CONFIGURATION --
-RUN  apt-get install -y php-xdebug
 
 
 
-# -- CONFIGURATION --
+# -- CONFIGURATION AND FINISHING --
 # PHP config
 COPY 40-custom-php.ini /etc/php/7.2/apache2/conf.d/40-custom-php.ini
 COPY 50-xdebug.ini /etc/php/7.2/apache2/conf.d/50-xdebug.ini
@@ -87,8 +88,7 @@ RUN    unlink /etc/localtime \
 
 # -- FINISHING --
 # Apache autostart and mod_rewrite enable
-ENTRYPOINT  service apache2 start \
-            && /bin/bash
+ENTRYPOINT service apache2 start
 
 # Cleanup
 RUN     apt-get autoremove \
