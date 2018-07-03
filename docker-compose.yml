@@ -6,10 +6,10 @@ services:
     image: php:7.2-app
     container_name: app-php
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html:cached
       - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
-      - ./_docker/logs/apache/:/var/log/apache2
-      - ./_docker/logs/php/:/var/log/php
+      - ./_docker/logs/apache/:/var/log/apache2:delegated
+      - ./_docker/logs/php/:/var/log/php:delegated
     networks:
       - app-network
     expose:
@@ -29,10 +29,10 @@ services:
       - MYSQL_CHARSET=utf8
       - MYSQL_COLLATION=utf8_czech_ci
     volumes:
-      - app-db-volume:/var/lib/mysql
+      - app-db-volume:/var/lib/mysql:delegated
       - ./_docker/conf/mysql/:/etc/mysql/:ro
       - ./_docker/data:/data:ro
-      - ./_docker/logs/mysql:/var/log/mysql/
+      - ./_docker/logs/mysql:/var/log/mysql/:delegated
     networks:
       - app-network
     expose:
