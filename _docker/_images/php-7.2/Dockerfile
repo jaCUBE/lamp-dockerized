@@ -9,15 +9,23 @@ ENV BUILD_DATE 2018-07-01
 # -- BASIC LINUX TOOLS AND DEPENDENCIES --
 RUN    apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y wget \
+    && apt-get install -y apt-transport-https \
+                          ca-certificates \
                           curl \
+                          discus \
+                          dstat \
                           git \
+                          glances \
                           gnupg2 \
+                          htop \
+                          lsof \
+                          mc \
                           mtr \
                           nano \
                           nmap \
-                          ca-certificates \
-                          apt-transport-https
+                          tcpdump \
+                          vim \
+                          wget
 
 
 # -- PHP INSTALLATION --
@@ -64,7 +72,7 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
 
 
 # -- XDEBUG INSTALLATION AND CONFIGURATION --
-RUN    apt-get install -y php-xdebug
+RUN  apt-get install -y php-xdebug
 
 
 
