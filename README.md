@@ -15,11 +15,22 @@ Start Docker containers like this:
 docker-compose up
 ```
 
+### Connecting a Container
+```
+docker exec -it app-php bash
+```
+
+### Re-Building
 Docker image builds automatically the first time. If you want to rebuild it later this:
 ```
 docker-compose build
 ```
 
+or optionally re-building with no cache used:
+
+```
+docker build ./_docker/_images/php-7.2 -t php:test --no-cache
+```
 
 
 
@@ -74,3 +85,59 @@ http://127.0.0.1:9200/_cat/health
 
 ## OS
 (TODO)
+
+### Bundled Tools
+**Discus:** Disk usage tool ([Discus web](http://www.debianadmin.com/check-your-linux-machine-disk-space-using-discus.html))
+```
+root@c8532ee00cb9:~# discus
+```
+
+**Dstat:** Overall system resources usage statistics tool ([Dstat web](http://dag.wiee.rs/home-made/dstat/), [Dstat GitHub](https://github.com/dagwieers/dstat))
+```
+root@c8532ee00cb9:~# dstat
+```
+
+**Glances:** Overall system resources usage overview tool ([Glances GitHub](https://github.com/nicolargo/glances))
+```
+root@c8532ee00cb9:~# glances
+```
+
+**htop:** System processes running overview tool ([htop web](https://hisham.hm/htop/))
+```
+root@c8532ee00cb9:~# htop
+```
+
+**lsof:** List of open files tool ([lsof web](https://www.ibm.com/developerworks/aix/library/au-lsof.html))
+```
+root@c8532ee00cb9:~# lsof
+```
+
+**Midnight Commander:** GUI file commander ([MC web](https://midnight-commander.org/), [MC GitHub](https://github.com/MidnightCommander/mc))
+```
+root@c8532ee00cb9:~# mc
+```
+
+**My Traceroute (MTR):** Traceroute and ping tool ([MTR web](https://www.linode.com/docs/networking/diagnostics/diagnosing-network-issues-with-mtr/))
+```
+root@c8532ee00cb9:~# mtr nix.cz
+```
+
+**nano:** Popular text editor ([nano wiki](https://en.wikipedia.org/wiki/GNU_nano))
+```
+root@c8532ee00cb9:~# nano test.txt
+```
+
+**Nmap:** Tool for mapping network ([Nmap web](https://www.linux.com/learn/beginners-guide-nmap))
+```
+root@c8532ee00cb9:~# nmap host.docker.internal
+```
+
+**tcpdump:** Packet sniffer for TCP/IP ([tcpdump web](https://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/))
+```
+root@c8532ee00cb9:~# tcpdump
+```
+
+**vim:** Popular text editor ([vim web](https://www.vim.org/))
+```
+root@c8532ee00cb9:~# vim test.txt
+```
