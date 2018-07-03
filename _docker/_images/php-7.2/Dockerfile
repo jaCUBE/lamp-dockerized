@@ -88,7 +88,8 @@ RUN    unlink /etc/localtime \
 
 # -- FINISHING --
 # Apache autostart and mod_rewrite enable
-ENTRYPOINT service apache2 start
+ENTRYPOINT  service apache2 start \
+            && /bin/bash
 
 # Cleanup
 RUN     apt-get autoremove \
