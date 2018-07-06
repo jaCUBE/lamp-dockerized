@@ -17,6 +17,7 @@ RUN    apt-get update \
                           curl \
                           discus \
                           dstat \
+                          ftp \
                           git \
                           glances \
                           gnupg2 \
@@ -27,6 +28,7 @@ RUN    apt-get update \
                           nano \
                           nmap \
                           tcpdump \
+                          telnet \
                           vim \
                           wget
 
@@ -88,12 +90,12 @@ RUN    unlink /etc/localtime \
 
 # -- FINISHING --
 # Apache autostart and mod_rewrite enable
-ENTRYPOINT  service apache2 start \
-            && /bin/bash
+ENTRYPOINT    service apache2 start \
+           && /bin/bash
 
 # Cleanup
-RUN     apt-get autoremove \
-    &&  apt-get clean
+RUN    apt-get autoremove \
+    && apt-get clean
 
 # Other stuff
 EXPOSE 80 443 9000
