@@ -3,7 +3,7 @@ FROM debian:stretch-slim
 LABEL maintainer="Jakub Rychecký <jakub@rychecky.cz>" \
       description="PHP 7.2 with Apache"
 
-ENV BUILD_DATE 2018-07-01
+ENV BUILD_DATE 2018-10-01
 
 
 
@@ -12,7 +12,8 @@ ENV BUILD_DATE 2018-07-01
 # -- BASIC LINUX TOOLS AND DEPENDENCIES --
 RUN    apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y apt-transport-https \
+    && apt-get install -y apt-utils \
+                          apt-transport-https \
                           ca-certificates \
                           curl \
                           discus \
@@ -50,6 +51,8 @@ RUN    wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add - \
                           php7.2-mbstring \
                           php7.2-mysql \
                           php7.2-odbc \
+                          php7.2-opcache \
+                          php7.2-readline \
                           php7.2-redis \
                           php7.2-sqlite3 \
                           php7.2-xml \
@@ -75,6 +78,11 @@ RUN    curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt-get install -y nodejs
 
+# -- BASIC NPM GLOBAL STUFF --
+RUN npm i gulp \
+          webpack \
+          webpack-cli \
+          yarn -g
 
 
 
