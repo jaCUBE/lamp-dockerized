@@ -6,7 +6,7 @@ services:
     image: php:7.2-app
     container_name: app-php
     volumes:
-      - ./:/var/www/html:cached
+      - ./html:/var/www/html:cached
       - ./_docker/data:/data
       - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
       - ./_docker/logs/apache/:/var/log/apache2:delegated

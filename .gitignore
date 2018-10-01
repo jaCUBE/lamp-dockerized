@@ -1,5 +1,8 @@
 !.gitkeep
 
+# App files
+/html/
+
 # Docker files
 /_docker/data/
 /_docker/data-sql/
