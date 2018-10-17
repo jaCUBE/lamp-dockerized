@@ -13,5 +13,4 @@
 # Docker files
 /docker/data/
 /docker/data-sql/
-/docker/logs/apache/
-/docker/logs/php/
+/docker/logs/
