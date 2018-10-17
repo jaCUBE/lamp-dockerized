@@ -2,16 +2,16 @@ version: "2"
 
 services:
   php:
-    build: ./_docker/_images/php-7.2
+    build: ./docker/images/php-7.2
     image: php:7.2-app
     container_name: app-php
     volumes:
-      - ./html:/var/www/html:cached
-      - ./_docker/data:/data
-      - ./_docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
-      - ./_docker/logs/apache/:/var/log/apache2:delegated
-      - ./_docker/logs/php/:/var/log/php:delegated
-      - ./_docker/logs/xdebug:/var/log/xdebug/:delegated
+      - ./app:/var/www/html:cached
+      - ./docker/data:/data
+      - ./docker/conf/apache/sites-enabled:/etc/apache2/sites-enabled:ro
+      - ./docker/logs/apache/:/var/log/apache2:delegated
+      - ./docker/logs/php/:/var/log/php:delegated
+      - ./docker/logs/xdebug:/var/log/xdebug/:delegated
     networks:
       - app-network
     expose:
@@ -32,9 +32,9 @@ services:
       - MYSQL_COLLATION=utf8_czech_ci
     volumes:
       - app-db-volume:/var/lib/mysql:delegated
-      - ./_docker/conf/mysql/:/etc/mysql/:ro
-      - ./_docker/sql:/data:ro
-      - ./_docker/logs/mysql:/var/log/mysql/:delegated
+      - ./docker/conf/mysql/:/etc/mysql/:ro
+      - ./docker/sql:/data:ro
+      - ./docker/logs/mysql:/var/log/mysql/:delegated
     networks:
       - app-network
     expose:
