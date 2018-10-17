@@ -20,13 +20,16 @@ RUN    apt-get update \
                           dstat \
                           ftp \
                           git \
+                          git-flow \
                           glances \
                           gnupg2 \
                           htop \
+                          imagemagick \
                           lsof \
                           mc \
                           mtr \
                           nano \
+                          neofetch \
                           nmap \
                           tcpdump \
                           telnet \

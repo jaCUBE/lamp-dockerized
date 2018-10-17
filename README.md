@@ -29,7 +29,7 @@ docker-compose build
 or optionally re-building with no cache used:
 
 ```
-docker build ./_docker/_images/php-7.2 -t php:test --no-cache
+docker build ./docker/images/php-7.2 -t php:test --no-cache
 ```
 
 
@@ -54,7 +54,7 @@ $myPDO = new PDO('mysql:host=app-mariadb;dbname=test', 'root', '12345');
 
 
 ## Redis
-(TODO)
+TODO
 
 
 
@@ -84,7 +84,7 @@ http://127.0.0.1:9200/_cat/health
 
 
 ## OS
-(TODO)
+TODO
 
 ### Bundled Tools
 **Discus:** Disk usage tool ([Discus web](http://www.debianadmin.com/check-your-linux-machine-disk-space-using-discus.html))
@@ -97,6 +97,9 @@ root@c8532ee00cb9:~# discus
 root@c8532ee00cb9:~# dstat
 ```
 
+**git-flow**
+TODO
+
 **Glances:** Overall system resources usage overview tool ([Glances GitHub](https://github.com/nicolargo/glances))
 ```
 root@c8532ee00cb9:~# glances
@@ -106,6 +109,9 @@ root@c8532ee00cb9:~# glances
 ```
 root@c8532ee00cb9:~# htop
 ```
+
+**imagemagick**
+TODO
 
 **lsof:** List of open files tool ([lsof web](https://www.ibm.com/developerworks/aix/library/au-lsof.html))
 ```
@@ -127,6 +133,11 @@ root@c8532ee00cb9:~# mtr nix.cz
 root@c8532ee00cb9:~# nano test.txt
 ```
 
+**neofetch** Nice overview of system ([neofetch GitHub](https://github.com/dylanaraps/neofetch))
+```
+neofetch
+```
+
 **Nmap:** Tool for mapping network ([Nmap web](https://www.linux.com/learn/beginners-guide-nmap))
 ```
 root@c8532ee00cb9:~# nmap host.docker.internal
@@ -141,3 +152,7 @@ root@c8532ee00cb9:~# tcpdump
 ```
 root@c8532ee00cb9:~# vim test.txt
 ```
+
+
+
+![LAMP Dockerized Neofetch](https://i.imgur.com/vu4AJu2.png "LAMP Dockerized Neofetch")

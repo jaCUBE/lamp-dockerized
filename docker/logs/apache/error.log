@@ -12,3 +12,8 @@
 [Sun Oct 14 02:22:43.412334 2018] [core:notice] [pid 27] AH00094: Command line: '/usr/sbin/apache2'
 [Wed Oct 17 22:07:11.028347 2018] [mpm_prefork:notice] [pid 25] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
 [Wed Oct 17 22:07:11.028809 2018] [core:notice] [pid 25] AH00094: Command line: '/usr/sbin/apache2'
+[Wed Oct 17 22:10:47.269227 2018] [core:warn] [pid 29] AH00098: pid file /var/run/apache2/apache2.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 17 22:10:47.274036 2018] [mpm_prefork:notice] [pid 29] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
+[Wed Oct 17 22:10:47.275208 2018] [core:notice] [pid 29] AH00094: Command line: '/usr/sbin/apache2'
+[Wed Oct 17 22:21:11.408740 2018] [mpm_prefork:notice] [pid 26] AH00163: Apache/2.4.25 (Debian) configured -- resuming normal operations
+[Wed Oct 17 22:21:11.409283 2018] [core:notice] [pid 26] AH00094: Command line: '/usr/sbin/apache2'
