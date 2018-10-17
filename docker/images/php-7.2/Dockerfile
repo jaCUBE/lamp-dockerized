@@ -101,7 +101,7 @@ RUN    unlink /etc/localtime \
 
 # -- FINISHING --
 # Apache autostart and mod_rewrite enable
-ENTRYPOINT    service apache2 start \
+ENTRYPOINT    bash /docker/scripts/docker_boot.sh \
            && /bin/bash
 
 # Cleanup

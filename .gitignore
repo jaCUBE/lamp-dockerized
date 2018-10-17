@@ -1,10 +1,17 @@
 !.gitkeep
 
 # App files
-/html/
+/app/
+!/app/app.local/index.php
+
+
+/docker/conf/apache/sites-available/
+!/docker/conf/apache/sites-available/000-default.conf
+!/docker/conf/apache/sites-available/app.local.conf
+
 
 # Docker files
-/_docker/data/
-/_docker/data-sql/
-/_docker/logs/apache/
-/_docker/logs/php/
+/docker/data/
+/docker/data-sql/
+/docker/logs/apache/
+/docker/logs/php/
