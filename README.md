@@ -29,7 +29,7 @@ docker-compose build
 or optionally re-building with no cache used:
 
 ```
-docker build ./docker/images/php-7.2 -t php:test --no-cache
+docker build ./docker/images/php-7.3 -t php:test --no-cache
 ```
 
 
