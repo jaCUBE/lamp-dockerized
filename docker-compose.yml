@@ -2,8 +2,8 @@ version: "2"
 
 services:
   php:
-    build: ./docker/images/php-7.2
-    image: php:7.2-app
+    build: ./docker/images/php-7.3
+    image: php:7.3-app
     container_name: app-php
     volumes:
       - ./app:/var/www/html:cached
